@@ -1,9 +1,31 @@
 package desafio.btgpactual.orderms.config;
 
+import org.springframework.amqp.core.Declarable;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfig {
 
     public static final String ORDER_CREATED_QUEUE = "btg-pactual-order-created";
+
+    /**
+     * Conversor de payload JAVA em JSON
+     * @return payload convertido
+     */
+    @Bean
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
+        return new Jackson2JsonMessageConverter();
+    }
+
+    /**
+     * Criação da fila
+     * @return A fila definida na constante
+     */
+    @Bean
+    public Declarable orderCreatedQueue(){
+        return new Queue(ORDER_CREATED_QUEUE);
+    }
 }
