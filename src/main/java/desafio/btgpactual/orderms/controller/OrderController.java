@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@CrossOrigin(origins = "*") // Permite todas as origens
 @RestController
 public class OrderController {
 
